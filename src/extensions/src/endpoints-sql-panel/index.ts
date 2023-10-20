@@ -23,14 +23,15 @@ export default defineEndpoint({
           .first();
         if (!field) res.status(404).send(`Field ${fieldId} not found`);
         const { sql, is_using_entity_id } = field.options as SQLPanelFields;
+
         if (!sql) res.status(404).send(`Field ${fieldId} has no sql option`);
+
         if (is_using_entity_id) {
           const { entityId } = req.body as { entityId: string };
 
           if (!entityId) res.status(400).send('Missing entityId');
           const preparedSql = sql.replace(PARAM_NAME, entityId);
           const result = await knex.raw(preparedSql);
-          console.log(result);
           res.status(200).send(result);
         } else {
           const result = await knex.raw(sql);
