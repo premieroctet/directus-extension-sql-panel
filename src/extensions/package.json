@@ -1,0 +1,46 @@
+{
+  "name": "directus-extension-sql-panel",
+  "version": "1.0.0",
+  "icon": "extension",
+  "description": "",
+  "keywords": [],
+  "directus:extension": {
+    "type": "bundle",
+    "path": {
+      "app": "dist/app.js",
+      "api": "dist/api.js"
+    },
+    "host": "^10.6.3",
+    "entries": [
+      {
+        "type": "endpoint",
+        "name": "endpoints-sql-panel",
+        "source": "src/endpoints-sql-panel/index.ts"
+      },
+      {
+        "type": "interface",
+        "name": "interface-sql-panel",
+        "source": "src/interface-sql-panel/index.ts"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "directus-extension build --sourcemap",
+    "dev": "directus-extension build -w --no-minify",
+    "link": "directus-extension link ../../extensions"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@directus/extensions-sdk": "^10.1.11",
+    "@directus/sdk": "^12.0.1",
+    "aws-sdk": "^2.1476.0",
+    "better-sqlite3": "^9.0.0",
+    "knex": "^3.0.1",
+    "mock-aws-s3": "^4.0.2",
+    "mysql2": "^3.6.2",
+    "nock": "^13.3.4",
+    "oracledb": "^6.2.0",
+    "pg-query-stream": "^4.5.3"
+  }
+}

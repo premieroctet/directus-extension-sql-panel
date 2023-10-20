@@ -1,0 +1,21 @@
+{
+  "name": "directus-extension-sql-panel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "directus start",
+    "dev": "concurrently \"cd src/extensions && npm run link && npm run dev\" \"npm run start\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "directus": "^10.6.3",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
