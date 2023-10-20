@@ -1,6 +1,6 @@
 # SQL Panel - Directus extension
 
-This is a custom interface for [Directus](https://directus.io/) that allows you to display result of custom SQL queries in a panel.
+This is a custom interface for [Directus](https://directus.io/) that allows you to display result of your SQL queries in a table.
 
 ## Installation
 
