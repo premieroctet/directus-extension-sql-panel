@@ -39,7 +39,7 @@ persons.name,
 role
 FROM credits
 LEFT JOIN persons ON person = persons.id
-WHERE movie = $entityId
+WHERE movie = $entityId;
 ```
 
 Here we're using the `$entityId` variable to get the current movie's id. It's part of our API and is automatically replaced by the current entity's id.
