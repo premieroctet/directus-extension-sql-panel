@@ -4,31 +4,23 @@ To install the dependencies, run the following command:
 yarn install
 ```
 
-launch database
+Launch database
 
 ```bash
 docker-compose up -d
 ```
 
-install directus
+Install directus
 
 ```bash
 npx directus bootstrap && npx directus database install
 
 ```
 
-install ADMIN role
+Use the following credentials:
 
-```
-npx directus roles create --role ADMIN --admin true
-```
-
-Copy the uuid of the role and paste it in the next command
-create user
-
-```
-npx directus users create --email admin@admin.com --password admin --role <uuid>
-```
+email: admin@admin.com  
+password: admin
 
 To start in development mode, run the following commands:
 
