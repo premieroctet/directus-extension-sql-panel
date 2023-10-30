@@ -1,5 +1,5 @@
 {
-  "name": "directus-extension-sql-panel",
+  "name": "@premieroctet/directus-extension-sql-panel",
   "version": "1.0.0",
   "icon": "extension",
   "description": "",

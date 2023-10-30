@@ -1,45 +1,45 @@
-import knex from 'knex';
+import { EndpointExtensionContext } from '@directus/types/dist/endpoints';
+import { SQLPanelFields } from '../interface-sql-panel/type';
+type Knex = EndpointExtensionContext['database'];
 
-export function getKnexInstance() {
-  const {
-    DB_CLIENT,
-    DB_HOST,
-    DB_PORT,
-    DB_DATABASE,
-    DB_PASSWORD,
-    DB_SSL,
-    DB_USER,
-  } = process.env;
-  if (
-    !DB_CLIENT ||
-    !DB_HOST ||
-    !DB_PORT ||
-    !DB_DATABASE ||
-    !DB_PASSWORD ||
-    !DB_SSL
-  )
-    throw new Error('Missing env variables');
+export class ClientSafeError extends Error {
+  isClientSafe: boolean;
+  constructor(message: string) {
+    super(message);
+    this.isClientSafe = true;
+  }
+}
 
-  const instance = knex({
-    client: DB_CLIENT,
-    connection: {
-      host: DB_HOST,
-      port: parseFloat(DB_PORT as string),
-      user: DB_USER,
-      database: DB_DATABASE,
-      password: DB_PASSWORD,
-      ...(DB_SSL === 'true' && { ssl: { rejectUnauthorized: false } }),
-    },
-    pool: {
-      min: 0,
-      max: 15,
-    },
-    log: {
-      error(message) {
-        console.error(message);
-      },
-    },
-  });
+export async function executeRawSQL(
+  knex: Knex,
+  sql: string,
+  options: {
+    isUsingEntityId: boolean;
+    currentEntityId?: string;
+  }
+) {
+  const PARAM_NAME = '$entityId';
+  if (!sql) throw new ClientSafeError('Missing sql');
+  if (!options.isUsingEntityId) return knex.raw(sql);
+  if (options.isUsingEntityId) {
+    if (!options.currentEntityId)
+      throw new ClientSafeError('Missing currentEntityId');
+    const preparedSql = sql.replace(PARAM_NAME, options.currentEntityId);
+    return knex.raw(preparedSql);
+  }
+}
 
-  return instance;
+export async function getFieldData(
+  knex: Knex,
+  fieldId: string
+): Promise<Pick<SQLPanelFields, 'sql' | 'is_using_entity_id'>> {
+  if (!fieldId) throw new ClientSafeError('Missing fieldId');
+  const field = await knex('directus_fields').where({ id: fieldId }).first();
+  if (!field) throw new ClientSafeError(`Field ${fieldId} not found`);
+  const { sql, is_using_entity_id } = field.options as SQLPanelFields;
+  if (!sql) throw new ClientSafeError(`Field ${fieldId} has no sql option`);
+  return {
+    sql,
+    is_using_entity_id: is_using_entity_id,
+  };
 }
