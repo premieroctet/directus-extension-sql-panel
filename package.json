@@ -1,7 +1,7 @@
 {
   "name": "@premieroctet/directus-extension-sql-panel",
   "author": "Quentin Grancher <qgrancher@premieroctet.com>",
-  "license": "ISC",
+  "license": "MIT",
   "version": "0.2.0",
   "icon": "extension",
   "private": false,
@@ -16,6 +16,10 @@
     "sql query",
     "table"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/premieroctet/directus-extension-sql-panel.git"
+  },
   "directus:extension": {
     "host": "^10.6.3",
     "type": "bundle",
