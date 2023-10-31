@@ -151,8 +151,6 @@ export default defineComponent({
       const choices: ColumnMetaType['options_list'] =
         this.columns_meta[columnIndex].options_list;
 
-      console.log({ choices, value, columnIndex });
-
       if (!choices || choices.length === 0) {
         return {
           value,
@@ -168,8 +166,6 @@ export default defineComponent({
           label: value,
         };
       }
-
-      console.log({ choice });
 
       return choice;
     },
