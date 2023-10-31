@@ -104,16 +104,28 @@ export default defineComponent({
         this.loading = false;
       }
     },
-    fetchData: async function () {
+    async getPrimaryKey(retry: number = 0) {
       /* If the fields loads before the item is done loading from the server: the primaryKey is '+'. So we wait .1s to get the real value */
-      if (this.$props.primaryKey === '+') {
-        await new Promise((resolve) => setTimeout(resolve, 100));
+      const MAX_RETRIES = 20;
+      if (retry > MAX_RETRIES) {
+        console.error('getPrimaryKey: too many retries, aborting.');
+        return null;
       }
+      const primaryKey = this.$props.primaryKey;
+      if (primaryKey === '+') {
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        return this.getPrimaryKey(retry + 1);
+      } else {
+        return primaryKey;
+      }
+    },
+    fetchData: async function () {
+      const primaryKey = await this.getPrimaryKey();
       return await this.api.post(
         `/endpoints-sql-panel/${this.$attrs['field-data'].meta.id}`,
         {
           ...(this.is_using_entity_id && {
-            entityId: this.$props.primaryKey,
+            entityId: primaryKey,
           }),
         }
       );

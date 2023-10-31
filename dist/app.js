@@ -211,15 +211,27 @@ var _sfc_main = defineComponent({
         this.loading = false;
       }
     },
-    fetchData: async function() {
-      if (this.$props.primaryKey === "+") {
-        await new Promise((resolve) => setTimeout(resolve, 100));
+    async getPrimaryKey(retry = 0) {
+      const MAX_RETRIES = 20;
+      if (retry > MAX_RETRIES) {
+        console.error("getPrimaryKey: too many retries, aborting.");
+        return null;
       }
+      const primaryKey = this.$props.primaryKey;
+      if (primaryKey === "+") {
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        return this.getPrimaryKey(retry + 1);
+      } else {
+        return primaryKey;
+      }
+    },
+    fetchData: async function() {
+      const primaryKey = await this.getPrimaryKey();
       return await this.api.post(
         `/endpoints-sql-panel/${this.$attrs["field-data"].meta.id}`,
         {
           ...this.is_using_entity_id && {
-            entityId: this.$props.primaryKey
+            entityId: primaryKey
           }
         }
       );
@@ -305,7 +317,7 @@ var _sfc_main = defineComponent({
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "\n.flex-col[data-v-35c624b6] {\n  display: flex;\n  justify-content: space-between;\n  gap: 1rem;\n  flex-direction: column;\n}\n.link[data-v-35c624b6] {\n  text-decoration: underline;\n  color: var(--primary, #000);\n  cursor: pointer;\n  opacity: 0.8;\n}\n";
+var css = "\n.flex-col[data-v-406684b3] {\n  display: flex;\n  justify-content: space-between;\n  gap: 1rem;\n  flex-direction: column;\n}\n.link[data-v-406684b3] {\n  text-decoration: underline;\n  color: var(--primary, #000);\n  cursor: pointer;\n  opacity: 0.8;\n}\n";
 n(css,{});
 
 var _export_sfc = (sfc, props) => {
@@ -316,7 +328,7 @@ var _export_sfc = (sfc, props) => {
   return target;
 };
 
-const _withScopeId = (n) => (pushScopeId("data-v-35c624b6"), n = n(), popScopeId(), n);
+const _withScopeId = (n) => (pushScopeId("data-v-406684b3"), n = n(), popScopeId(), n);
 const _hoisted_1 = { class: "flex-col" };
 const _hoisted_2 = { key: 0 };
 const _hoisted_3 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createElementVNode(
@@ -458,7 +470,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     ])) : createCommentVNode("v-if", true)
   ]);
 }
-var Interface = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-35c624b6"], ["__file", "interface.vue"]]);
+var Interface = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-406684b3"], ["__file", "interface.vue"]]);
 
 var e0 = defineInterface({
   id: "interface-sql-panel",
