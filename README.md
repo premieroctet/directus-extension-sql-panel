@@ -1,1 +1,1 @@
-src/extension/README.md
+src/README.md
