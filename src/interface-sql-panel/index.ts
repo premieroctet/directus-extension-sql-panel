@@ -56,7 +56,7 @@ export default defineInterface({
       meta: {
         required: true,
         width: 'full',
-        interface: 'input-multiline',
+        interface: 'input-code',
         options: {
           placeholder: 'SELECT * FROM directus_files;',
         },
