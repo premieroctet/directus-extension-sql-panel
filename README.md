@@ -28,7 +28,7 @@ How to use the extension in your Directus project ?
 Let's say you're building a back-office to manage movies / actors and credits.
 You might want to display a list cast and crew of a movie in the movie's detail page.
 
-![Example of usage](./docs/example.png)
+![Example of usage](https://github.com/premieroctet/directus-extension-sql-panel/blob/main/docs/example.png)
 
 To do so, you can create a new **SQL Panel** field in the `movies` data model, and fill out the settings with the following SQL query:
 
@@ -51,8 +51,8 @@ We'll now fill out the columns settings. For each column, you can specify:
 - The column's width (in pixels) (optional)
 - If it's sortable (optional)
 
-![Example of settings top](./docs/example-settings-1.png)
-![Example of settings bottom](./docs/example-settings-2.png)
+![Example of settings top](https://github.com/premieroctet/directus-extension-sql-panel/blob/main/docs/example-settings-1.png)
+![Example of settings bottom](https://github.com/premieroctet/directus-extension-sql-panel/blob/main/docs/example-settings-2.png)
 
 We save the field settings and we're done ! 🎉
 
@@ -84,7 +84,7 @@ We recommend set the width of this column to `0` so it's not displayed and the r
 
 ##### List of options
 
-![List of options settings](./docs/list-settings.png)
+![List of options settings](https://github.com/premieroctet/directus-extension-sql-panel/blob/main/docs/list-settings.png)
 
 A list of options to be displayed according to the value.
 You need to specify the list of options in the `list of options` field settings.
@@ -95,4 +95,4 @@ For each option, you need to specify:
   and optionally:
 - The option's color (hexadecimal value)
 
-![Option settings](./docs/option-settings.png)
+![Option settings](https://github.com/premieroctet/directus-extension-sql-panel/blob/main/docs/option-settings.png)
