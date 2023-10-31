@@ -20,6 +20,9 @@
     "type": "git",
     "url": "https://github.com/premieroctet/directus-extension-sql-panel.git"
   },
+  "bugs": {
+    "url": "https://github.com/premieroctet/directus-extension-sql-panel/issues"
+  },
   "directus:extension": {
     "host": "^10.6.3",
     "type": "bundle",
