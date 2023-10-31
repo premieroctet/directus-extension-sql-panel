@@ -5,14 +5,16 @@ This is a custom interface for [Directus](https://directus.io/) that allows you 
 ## Installation
 
 ```bash
-npm install directus-extension-sql-panel
+npm install @premieroctet/directus-extension-sql-panel/directus-extension-sql-panel
 ```
 
 or using yarn :
 
 ```bash
-yarn add directus-extension-sql-panel
+yarn add @premieroctet/directus-extension-sql-panel/directus-extension-sql-panel
 ```
+
+You should be set to go, [Directus will automatically detect the extension](https://docs.directus.io/guides/extensions/operations-npm-package.html#add-operation-to-directus).
 
 ## Usage
 
