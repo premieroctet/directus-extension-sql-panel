@@ -107,7 +107,7 @@ export default defineComponent({
     fetchData: async function () {
       /* If the fields loads before the item is done loading from the server: the primaryKey is '+'. So we wait .1s to get the real value */
       if (this.$props.primaryKey === '+') {
-        await new Promise((resolve) => setTimeout(resolve, 10));
+        await new Promise((resolve) => setTimeout(resolve, 100));
       }
       return await this.api.post(
         `/endpoints-sql-panel/${this.$attrs['field-data'].meta.id}`,
@@ -139,6 +139,8 @@ export default defineComponent({
       const choices: ColumnMetaType['options_list'] =
         this.columns_meta[columnIndex].options_list;
 
+      console.log({ choices, value, columnIndex });
+
       if (!choices || choices.length === 0) {
         return {
           value,
@@ -154,6 +156,8 @@ export default defineComponent({
           label: value,
         };
       }
+
+      console.log({ choice });
 
       return choice;
     },
@@ -248,29 +252,31 @@ export default defineComponent({
             #[`item.${header.value}`]="{ item }"
           >
             <div :key="index">
-              <!-- Conditional rendering -->
-              <!-- String -->
               <span v-if="header.data_type === 'string'">
+                <!-- String -->
                 {{ item[header.value] }}
               </span>
-              <!-- Date -->
+
               <span v-else-if="header.data_type === 'date'">
+                <!-- Date -->
                 {{
                   item[header.value] &&
                   new Date(item[header.value]).toLocaleDateString()
                 }}
               </span>
-              <!-- Datetime -->
+
               <span v-else-if="header.data_type === 'date_time'">
+                <!-- Datetime -->
                 {{
                   item[header.value] &&
                   formatDateToDateTimeString(item[header.value])
                 }}
               </span>
-              <!-- Ressource id -->
-              <a v-else-if="header.data_type === 'ressource_id'"> </a>
 
-              <!-- Select -->
+              <a v-else-if="header.data_type === 'ressource_id'">
+                <!-- Ressource id -->
+              </a>
+
               <span
                 v-else-if="header.data_type === 'list'"
                 v-bind:style="[
@@ -279,6 +285,7 @@ export default defineComponent({
                     : {},
                 ]"
               >
+                <!-- Select -->
                 {{ getChoice(item[header.value], index).label }}
               </span>
 

@@ -1,4 +1,4 @@
-import { defineComponent, resolveComponent, openBlock, createElementBlock, createCommentVNode, createBlock, createSlots, renderList, withCtx, toDisplayString, Fragment, createElementVNode, normalizeStyle, createVNode, pushScopeId, popScopeId } from 'vue';
+import { defineComponent, resolveComponent, openBlock, createElementBlock, createCommentVNode, createBlock, createSlots, renderList, withCtx, toDisplayString, createTextVNode, normalizeStyle, Fragment, createElementVNode, createVNode, pushScopeId, popScopeId } from 'vue';
 
 /* micromustache v8.0.3 */
 /** @internal */
@@ -213,7 +213,7 @@ var _sfc_main = defineComponent({
     },
     fetchData: async function() {
       if (this.$props.primaryKey === "+") {
-        await new Promise((resolve) => setTimeout(resolve, 10));
+        await new Promise((resolve) => setTimeout(resolve, 100));
       }
       return await this.api.post(
         `/endpoints-sql-panel/${this.$attrs["field-data"].meta.id}`,
@@ -238,6 +238,7 @@ var _sfc_main = defineComponent({
     },
     getChoice(value, columnIndex) {
       const choices = this.columns_meta[columnIndex].options_list;
+      console.log({ choices, value, columnIndex });
       if (!choices || choices.length === 0) {
         return {
           value,
@@ -251,6 +252,7 @@ var _sfc_main = defineComponent({
           label: value
         };
       }
+      console.log({ choice });
       return choice;
     }
   },
@@ -303,7 +305,7 @@ var _sfc_main = defineComponent({
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = "\n.flex-col[data-v-c3d71eb0] {\n  display: flex;\n  justify-content: space-between;\n  gap: 1rem;\n  flex-direction: column;\n}\n.link[data-v-c3d71eb0] {\n  text-decoration: underline;\n  color: var(--primary, #000);\n  cursor: pointer;\n  opacity: 0.8;\n}\n";
+var css = "\n.flex-col[data-v-35c624b6] {\n  display: flex;\n  justify-content: space-between;\n  gap: 1rem;\n  flex-direction: column;\n}\n.link[data-v-35c624b6] {\n  text-decoration: underline;\n  color: var(--primary, #000);\n  cursor: pointer;\n  opacity: 0.8;\n}\n";
 n(css,{});
 
 var _export_sfc = (sfc, props) => {
@@ -314,7 +316,7 @@ var _export_sfc = (sfc, props) => {
   return target;
 };
 
-const _withScopeId = (n) => (pushScopeId("data-v-c3d71eb0"), n = n(), popScopeId(), n);
+const _withScopeId = (n) => (pushScopeId("data-v-35c624b6"), n = n(), popScopeId(), n);
 const _hoisted_1 = { class: "flex-col" };
 const _hoisted_2 = { key: 0 };
 const _hoisted_3 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createElementVNode(
@@ -334,16 +336,12 @@ const _hoisted_6 = {
 };
 const _hoisted_7 = ["title"];
 const _hoisted_8 = { key: 0 };
-const _hoisted_9 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createElementVNode(
-  "a",
-  null,
-  null,
-  -1
-  /* HOISTED */
-));
-const _hoisted_10 = { key: 1 };
-const _hoisted_11 = { key: 2 };
-const _hoisted_12 = { key: 2 };
+const _hoisted_9 = { key: 1 };
+const _hoisted_10 = { key: 2 };
+const _hoisted_11 = { key: 3 };
+const _hoisted_12 = { key: 1 };
+const _hoisted_13 = { key: 2 };
+const _hoisted_14 = { key: 2 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_v_table = resolveComponent("v-table");
   const _component_v_error = resolveComponent("v-error");
@@ -384,72 +382,47 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               name: `item.${header.value}`,
               fn: withCtx(({ item }) => [
                 (openBlock(), createElementBlock("div", { key: index }, [
-                  createCommentVNode(" Conditional rendering "),
-                  createCommentVNode(" String "),
-                  header.data_type === "string" ? (openBlock(), createElementBlock(
+                  header.data_type === "string" ? (openBlock(), createElementBlock("span", _hoisted_8, [
+                    createCommentVNode(" String "),
+                    createTextVNode(
+                      " " + toDisplayString(item[header.value]),
+                      1
+                      /* TEXT */
+                    )
+                  ])) : header.data_type === "date" ? (openBlock(), createElementBlock("span", _hoisted_9, [
+                    createCommentVNode(" Date "),
+                    createTextVNode(
+                      " " + toDisplayString(item[header.value] && new Date(item[header.value]).toLocaleDateString()),
+                      1
+                      /* TEXT */
+                    )
+                  ])) : header.data_type === "date_time" ? (openBlock(), createElementBlock("span", _hoisted_10, [
+                    createCommentVNode(" Datetime "),
+                    createTextVNode(
+                      " " + toDisplayString(item[header.value] && _ctx.formatDateToDateTimeString(item[header.value])),
+                      1
+                      /* TEXT */
+                    )
+                  ])) : header.data_type === "ressource_id" ? (openBlock(), createElementBlock("a", _hoisted_11, [
+                    createCommentVNode(" Ressource id ")
+                  ])) : header.data_type === "list" ? (openBlock(), createElementBlock(
                     "span",
-                    _hoisted_8,
-                    toDisplayString(item[header.value]),
-                    1
-                    /* TEXT */
-                  )) : header.data_type === "date" ? (openBlock(), createElementBlock(
-                    Fragment,
-                    { key: 1 },
-                    [
-                      createCommentVNode(" Date "),
-                      createElementVNode(
-                        "span",
-                        null,
-                        toDisplayString(item[header.value] && new Date(item[header.value]).toLocaleDateString()),
-                        1
-                        /* TEXT */
-                      )
-                    ],
-                    2112
-                    /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-                  )) : header.data_type === "date_time" ? (openBlock(), createElementBlock(
-                    Fragment,
-                    { key: 2 },
-                    [
-                      createCommentVNode(" Datetime "),
-                      createElementVNode(
-                        "span",
-                        null,
-                        toDisplayString(item[header.value] && _ctx.formatDateToDateTimeString(item[header.value])),
-                        1
-                        /* TEXT */
-                      )
-                    ],
-                    2112
-                    /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-                  )) : header.data_type === "ressource_id" ? (openBlock(), createElementBlock(
-                    Fragment,
-                    { key: 3 },
-                    [
-                      createCommentVNode(" Ressource id "),
-                      _hoisted_9
-                    ],
-                    2112
-                    /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-                  )) : header.data_type === "list" ? (openBlock(), createElementBlock(
-                    Fragment,
-                    { key: 4 },
+                    {
+                      key: 4,
+                      style: normalizeStyle([
+                        _ctx.getChoice(item[header.value], index).color ? { color: _ctx.getChoice(item[header.value], index).color } : {}
+                      ])
+                    },
                     [
                       createCommentVNode(" Select "),
-                      createElementVNode(
-                        "span",
-                        {
-                          style: normalizeStyle([
-                            _ctx.getChoice(item[header.value], index).color ? { color: _ctx.getChoice(item[header.value], index).color } : {}
-                          ])
-                        },
-                        toDisplayString(_ctx.getChoice(item[header.value], index).label),
-                        5
-                        /* TEXT, STYLE */
+                      createTextVNode(
+                        " " + toDisplayString(_ctx.getChoice(item[header.value], index).label),
+                        1
+                        /* TEXT */
                       )
                     ],
-                    2112
-                    /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+                    4
+                    /* STYLE */
                   )) : (openBlock(), createElementBlock(
                     Fragment,
                     { key: 5 },
@@ -473,19 +446,19 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         ]), 1032, ["headers", "items", "row-height", "onUpdate:sort", "onClick:row", "sort", "clickable"])) : createCommentVNode("v-if", true),
         this.data.length > 1 ? (openBlock(), createElementBlock(
           "p",
-          _hoisted_10,
+          _hoisted_12,
           toDisplayString(_ctx.resultsNumber),
           1
           /* TEXT */
-        )) : this.data.length === 0 ? (openBlock(), createElementBlock("p", _hoisted_11, "No results")) : createCommentVNode("v-if", true)
+        )) : this.data.length === 0 ? (openBlock(), createElementBlock("p", _hoisted_13, "No results")) : createCommentVNode("v-if", true)
       ])) : createCommentVNode("v-if", true)
     ])) : createCommentVNode("v-if", true),
-    _ctx.error ? (openBlock(), createElementBlock("div", _hoisted_12, [
+    _ctx.error ? (openBlock(), createElementBlock("div", _hoisted_14, [
       createVNode(_component_v_error, { error: _ctx.error }, null, 8, ["error"])
     ])) : createCommentVNode("v-if", true)
   ]);
 }
-var Interface = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-c3d71eb0"], ["__file", "interface.vue"]]);
+var Interface = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-35c624b6"], ["__file", "interface.vue"]]);
 
 var e0 = defineInterface({
   id: "interface-sql-panel",
