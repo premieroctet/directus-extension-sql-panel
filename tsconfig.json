@@ -1,5 +1,5 @@
 {
-  "files": ["./src/custom-env.d.ts"],
+  "files": ["../../src/custom-env.d.ts"],
   "compilerOptions": {
     "target": "ES2019",
     "lib": ["ES2019", "DOM"],
@@ -24,13 +24,13 @@
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
-    "rootDir": "./src"
+    "rootDir": "../../src"
   },
   "include": [
-    "./src/**/*.ts",
-    "./src/**/*.tsx",
+    "../../src/**/*.ts",
+    "../../src/**/*.tsx",
     "./*.ts",
-    "./src/*.d.ts",
-    "./src/*.vue"
+    "../../src/*.d.ts",
+    "../../src/*.vue"
   ]
 }
