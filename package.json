@@ -2,7 +2,7 @@
   "name": "@premieroctet/directus-extension-sql-panel",
   "author": "Quentin Grancher <qgrancher@premieroctet.com>",
   "license": "MIT",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "icon": "extension",
   "private": false,
   "description": "A custom interface for Directus that allows you to display result of your SQL queries in a table.",
