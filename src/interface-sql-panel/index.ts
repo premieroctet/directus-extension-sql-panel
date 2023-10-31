@@ -57,6 +57,10 @@ export default defineInterface({
         required: true,
         width: 'full',
         interface: 'input-multiline',
+        options: {
+          placeholder: 'SELECT * FROM directus_files;',
+        },
+        note: 'With entityId enabled, use -> $entityId <- to get the id of the current entity. Ex: SELECT * FROM my_table WHERE id = $entityId;',
       },
       schema: {
         name: 'id',

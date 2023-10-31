@@ -93,7 +93,13 @@ export default defineComponent({
           /* We set the clickable props (v-table) only when we have a clickable row feature (here, link to a ressource) */
         }
       } catch (err) {
-        this.error = err;
+        const errorMessage =
+          err.response.data ||
+          err.message ||
+          err.code ||
+          err.stack ||
+          'Unknown error';
+        this.error = errorMessage;
       } finally {
         this.loading = false;
       }
@@ -196,7 +202,7 @@ export default defineComponent({
   data() {
     return {
       loading: false as boolean,
-      error: null,
+      error: null as string | null,
       data: null as Array<Record<string, any>> | null,
       sort: null as SortType,
       shouldHaveClickableRows: false,
@@ -213,7 +219,7 @@ export default defineComponent({
     <div v-if="loading">
       <p>Loading ...</p>
     </div>
-    <div v-if="data !== null">
+    <div v-if="data !== null && !error && !loading">
       <!-- Display data -->
       <div v-if="Array.isArray(data)" class="flex-col">
         <!-- Data is an array -->
