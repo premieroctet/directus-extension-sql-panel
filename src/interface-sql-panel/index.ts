@@ -59,6 +59,7 @@ export default defineInterface({
         interface: 'input-code',
         options: {
           placeholder: 'SELECT * FROM directus_files;',
+          language: 'sql',
         },
         note: 'With entityId enabled, use -> $entityId <- to get the id of the current entity. Ex: SELECT * FROM my_table WHERE id = $entityId;',
       },
